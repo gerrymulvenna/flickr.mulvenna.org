@@ -1,7 +1,7 @@
 # flickr.mulvenna.org
 A simple Flickr app using the Flickr::API Perl module
 
-# PURPOSE
+## PURPOSE
 
 This code creates a Flickr app to move images from one of your Flickr albums to another based on their title or filename.
 
@@ -13,7 +13,7 @@ For the Flickr user, the 5-step process once authenticated is as follows:
 4. search for items in the first album selected
 5. move those items to the destination album
 
-# INSTALLATION
+## INSTALLATION
 
 * Deploy this repository to a web server
 * Setup an app on your Flickr account at https://www.flickr.com/services/apps/create/
