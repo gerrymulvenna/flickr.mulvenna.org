@@ -1,0 +1,21 @@
+:root {
+	--header-back-color: rgb(187,209,148);
+	--input-back-color: #f8f8f8;
+}
+
+.alignleft {
+  text-align: left;
+}
+
+.alignright {
+  text-align: right;
+}
+
+.aligncenter {
+  text-align: center;
+}
+
+.opaque {
+  opacity: 0.5;
+}
+

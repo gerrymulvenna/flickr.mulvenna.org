@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'c39hrp48dhtt-webfont';
+    src: url('/fonts/c39hrp48dhtt-webfont.woff2') format('woff2'),
+         url('/fonts/c39hrp48dhtt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.barcode90 {
+  font-family: c39hrp48dhtt-webfont;
+	font-size: 90px;
+}
+
+.barcode72 {
+  font-family: c39hrp48dhtt-webfont;
+	font-size: 72px;
+}
+
