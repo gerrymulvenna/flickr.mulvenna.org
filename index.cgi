@@ -177,7 +177,7 @@ elsif ($oauth_verifier)
 		print "</pre>";
 	}
 }
-elsif(defined $api->{'oauth'}->{'callback'})
+elsif(defined $api->{'oauth'}->{'user'})
 {
 	my $response = $api->execute_method('flickr.auth.oauth.checkToken');
 	my $hash_ref = $response->as_hash();
