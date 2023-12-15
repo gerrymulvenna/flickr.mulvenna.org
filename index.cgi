@@ -191,9 +191,6 @@ elsif(defined $api->{'oauth'}->{'token'})
 	print search_form();
 	my $text = sprintf ("Authenticated for %s access to<br><a href=\"https://www.flickr.com/photos/%s/\">%s's Flickr</a>", $perms, $nsid, $name);
 	print footer($text);
-	print "<pre>\n";
-	print Dumper ($api);
-	print "</pre>";
 }
 else
 {
