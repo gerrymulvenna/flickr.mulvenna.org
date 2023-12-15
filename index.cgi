@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # One-stop perl script to demonstrate how to interact with Flickr API via OAuth 1.0
-# Gerry Mulvenna, 24 Aug 2023
+# Gerry Mulvenna, 9 Dec 2023
 #
 # + stores the initial API object as a tmp file, which persists until the non-expiring access token is received.
 # + access token is stored as a cookie
@@ -23,14 +23,14 @@ require "./credentials.pl";
 # our $consumer_key = "<YOUR Flickr API CONSUMER KEY>";
 # our $consumer_secret = "<YOUR Flickr API CONSUMER SECRET>";
 # our $redirect_uri = "<YOUR Flickr API CALLBACK URL>";
-# our $FlickrCredentials::config_file = "<SERVER PATH TO INITIAL CONFIG FILE>"; # e.g. '/tmp/'.$consumer_key.'.st';
-
+# our $config_file = "<SERVER PATH TO INITIAL CONFIG FILE>"; # e.g. '/tmp/'.$consumer_key.'.st';
+# our $cookie_prefix = "<something relatively unique to prefix your cookies with>"; # e.g. $consumer_key . '-';
 1;
 
 my $cgi = CGI->new();
 my $title = "Flickr move-by-name";
-my $token = $cgi->cookie('Flickr_token');
-my $secret = $cgi->cookie('Flickr_secret');
+my $token = $cgi->cookie($FlickrCredentials::cookie_prefix . 'token');
+my $secret = $cgi->cookie($FlickrCredentials::cookie_prefix . 'secret');
 my $api;
 
 if (-f $FlickrCredentials::config_file)
@@ -63,8 +63,8 @@ if (defined $operation)
 			unlink $FlickrCredentials::config_file;
 		}
 		# remove the cookies
-		my $token_cookie = $cgi->cookie(-name=>'Flickr_token',-value=>'',-expires=>'-1d');
-		my $secret_cookie = $cgi->cookie(-name=>'Flickr_secret',-value=>'',-expires=>'-1d');
+		my $token_cookie = $cgi->cookie(-name=>$FlickrCredentials::cookie_prefix . 'token',-value=>'',-expires=>'-1d');
+		my $secret_cookie = $cgi->cookie(-name=>$FlickrCredentials::cookie_prefix . 'secret',-value=>'',-expires=>'-1d');
 		print $cgi->header(-type=>'text/html', -cookie=>[$token_cookie, $secret_cookie]);
 		print head($title, "Disconnected - click to continue");
 	}
@@ -155,8 +155,8 @@ elsif ($oauth_verifier)
 	if ( $ac_rc eq 'ok' ) {
 		unlink $FlickrCredentials::config_file;
 		my %config = $api->export_config();
-		my $token_cookie = $cgi->cookie(-name=>'Flickr_token',-value=>$config{'token'},-expires=>'+6M');
-		my $secret_cookie = $cgi->cookie(-name=>'Flickr_secret',-value=>$config{'token_secret'},-expires=>'+6M');
+		my $token_cookie = $cgi->cookie(-name=>$FlickrCredentials::cookie_prefix . 'token',-value=>$config{'token'},-expires=>'+6M');
+		my $secret_cookie = $cgi->cookie(-name=>$FlickrCredentials::cookie_prefix . 'secret',-value=>$config{'token_secret'},-expires=>'+6M');
 	 
 		my $response = $api->execute_method('flickr.auth.oauth.checkToken');
 		my $hash_ref = $response->as_hash();
