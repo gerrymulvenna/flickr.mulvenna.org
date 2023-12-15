@@ -193,7 +193,7 @@ elsif(defined $api->{'oauth'}->{'callback'})
 	my $text = sprintf ("Authenticated for %s access to<br><a href=\"https://www.flickr.com/photos/%s/\">%s's Flickr</a>", $perms, $nsid, $name);
 	print footer($text);
 	print "<pre>\n";
-	print Dumper ($$hash_ref);
+	print Dumper ($hash_ref);
 	print "</pre>";
 }
 else
