@@ -177,7 +177,7 @@ elsif ($oauth_verifier)
 		print "</pre>";
 	}
 }
-elsif(defined $api->{'oauth'}->{'callback'})
+elsif(defined $api->{'oauth'}->{'token'})
 {
 	my $response = $api->execute_method('flickr.auth.oauth.checkToken');
 	my $hash_ref = $response->as_hash();
@@ -189,7 +189,6 @@ elsif(defined $api->{'oauth'}->{'callback'})
 	print $cgi->header('text/html');
 	print head($title, "Home", 1);  #include extra js and css stuff
 	print search_form();
-#	print move_form();
 	my $text = sprintf ("Authenticated for %s access to<br><a href=\"https://www.flickr.com/photos/%s/\">%s's Flickr</a>", $perms, $nsid, $name);
 	print footer($text);
 	print "<pre>\n";
